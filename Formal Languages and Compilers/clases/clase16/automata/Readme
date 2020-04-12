@@ -1,0 +1,29 @@
+
+Requisitos:
+
+* Java SDK 1.6 o mayor.
+* Maven 3.3.9
+
+El proyecto Automata muestra como crear automatas de estado finito para el
+autómata mostrado en el libro de Crespi. Págs: 98-102.
+
+Son diferentes los ejemplos de autómatas definidos.
+
+Basado en Switch.
+Para ejecutar: java -cp $CLASSPATH:./target/classes co.AutoNumPunFlo
+Basado en Tabla.
+Para ejecutar: java -cp $CLASSPATH:./target/classes co.AutoNumPunFloT
+Basado en Map.
+Para ejecutar: java -cp $CLASSPATH:./target/classes co.AutoNumPunFloM
+
+Un ejemplo de ejecución es la siguiente:
+
+$ java -cp $CLASSPATH:./target/classes co.AutoNumPunFloM
+Escriba una línea de valores e imprimalos
+1.0
+cadena aceptada: 1.0
+0.1
+cadena aceptada: 0.1
+.1
+cadena rechazada
+<ctrl-d>

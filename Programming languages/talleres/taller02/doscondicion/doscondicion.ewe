@@ -1,0 +1,25 @@
+INICIO:
+        cero := 0
+	uno := 1
+	diez := 10
+	veinte := 20
+	readInt(a)
+	readInt(b)
+	if a < diez then goto COND2
+	writeInt(uno)
+	goto FIN
+COND2:
+        if b > veinte then goto TCOND2
+	writeInt(uno)
+	goto FIN
+TCOND2:
+        writeInt(cero)
+	goto FIN
+FIN:
+        halt
+equ cero M[0]
+equ uno M[1]
+equ a M[2]
+equ b M[3]
+equ veinte M[4]
+equ diez M[5]

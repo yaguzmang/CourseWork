@@ -1,0 +1,43 @@
+INICIO:
+       uno := 1
+       asuma := 43
+       aresta := 45
+       amulti := 42
+       adiv := 47
+       readStr(str,uno)
+       readInt(a)
+       readInt(b)       
+       if str = asuma then goto SUMA
+       if str = aresta then goto RESTA
+       if str = amulti then goto MULTI
+       if str = adiv then goto DIV
+       goto FIN
+SUMA:
+       suma := a + b
+       writeInt(suma)
+       goto FIN
+RESTA:
+       resta := a - b
+       writeInt(resta)
+       goto FIN
+MULTI:
+       multi := a * b
+       writeInt(multi)
+       goto FIN
+DIV:
+       div := a/b
+       writeInt(div)
+       goto FIN
+FIN: halt
+equ str M[0]
+equ a M[1]
+equ b M[2]
+equ suma M[3]
+equ resta M[4]
+equ multi M[5]
+equ div M[6]
+equ asuma M[7]
+equ aresta M[8]
+equ amulti M[9]
+equ adiv M[10]
+equ uno M[11]

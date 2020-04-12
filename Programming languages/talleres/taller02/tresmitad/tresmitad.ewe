@@ -1,0 +1,35 @@
+#Algoritmo que recibe tres numeros y muetra en pantalla el que esta en medio
+INICIO:
+       readInt(a)
+       readInt(b)
+       readInt(c)
+       if a >= b then goto COND2
+       if a <= c then goto COND4
+       writeInt(a)
+       goto FIN
+COND2:
+       if c <= b then goto TRUEB
+       goto COND5
+COND4:
+       if c<=b then goto TRUEC
+       writeInt(b)
+       goto FIN
+COND5:
+       if a <= c then goto TRUEA
+       goto TRUEC
+#COND6:
+#       if a then goto 
+TRUEB:
+       writeInt(b)
+       goto FIN
+TRUEC:
+       writeInt(c)
+       goto FIN
+TRUEA:
+       writeInt(a)
+       goto FIN
+       
+FIN: halt
+equ a M[0]
+equ b M[1]
+equ c M[2]

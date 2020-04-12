@@ -1,0 +1,23 @@
+#Algoritmo que calculoel menor de tres numeros enteros recibidos
+INICIO:
+         readInt(a)
+	 readInt(b)
+	 readInt(c)
+	 if a >= b then goto COND2
+	 if a >= c then goto TCOND2
+	 writeInt(a)
+	 goto FINCOND1
+COND2:
+         if b >= c then goto TCOND2
+	 writeInt(b)
+	 goto FINCOND1
+TCOND2:
+         writeInt(c)
+	 goto FIN
+FINCOND1:
+	goto FIN	 
+FIN:
+        halt
+equ a M[0]
+equ b M[1]
+equ c M[2]

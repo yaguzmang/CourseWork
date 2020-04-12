@@ -1,0 +1,8 @@
+all: verificarTres
+
+verificarTres: verificarTres.o tresMayor.o
+	$(CXX) -o $@ $^
+
+verificarTres.o: verificarTres.cpp tresMayor.h
+
+tresMayor.o: tresMayor.cpp tresMayor.h

@@ -1,0 +1,30 @@
+INICIO:
+        cero := 0
+	uno := 1
+	readInt(a)
+	readInt(b)
+	readInt(c)
+	readInt(d)
+	if a < b then goto COND2
+	writeInt(cero)
+	goto FIN
+COND2:
+        if b < c then goto COND3
+	writeInt(cero)
+	goto FIN
+COND3:
+        if c < d then goto TCONDICIONES
+        writeInt(cero)
+        goto FIN
+TCONDICIONES:
+        writeInt(uno)
+        goto FIN
+
+FIN:
+        halt
+equ cero M[0]
+equ uno M[1]
+equ a M[2]
+equ b M[3]
+equ c M[4]
+equ d M[5]

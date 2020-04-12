@@ -1,0 +1,20 @@
+INICIO:
+        cero := 0
+	uno := 1
+	readInt(a)
+	readInt(b)
+	if a > cero then goto COND2
+	writeInt(b)
+	goto FIN
+COND2:
+        if b > cero then goto TCOND2
+	writeInt(b)
+	goto FIN
+TCOND2:
+       writeInt(a)
+FIN:
+        halt
+equ cero M[0]
+equ uno M[1]
+equ a M[2]
+equ b M[3]

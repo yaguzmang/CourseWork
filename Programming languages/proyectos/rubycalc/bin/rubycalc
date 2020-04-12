@@ -1,0 +1,157 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'calculator'
+require 'calcex'
+require 'io/console'
+
+$calc = Calculator.new
+header = ""
+footer = ""
+i = 0
+countFiles = 0
+envVarPref = false
+arg = :none
+fileFound = Array.new(ARGV.length, false) 
+# Initialization of the header and footer
+header = "# Automatically generated, do not edit\n   SP := 40000\n   ONE := 1\n   ZERO := 0\n   MONE := ZERO - ONE\n   MEMORY := 0\n# ARG variables\n"
+footer = "   halt\n# Memory definition\nequ ZERO M[0]\nequ ONE M[1]\nequ R0 M[2]\nequ R1 M[3]\nequ SP M[4]\nequ MONE M[5]\nequ MEMORY M[6]\n"
+# Initialization process
+ARGV.each do |calcArg|
+  case calcArg
+  when "-c"
+    $calc.compileEWE = true
+  when "-e"
+    envVarPref = true
+  when "-v"
+    arg = :var
+  else
+    if calcArg.include? ".expr" then 
+      countFiles += 1; 
+      fileFound[i] = true
+    end
+    case arg
+    when :var
+    # Validation of a valid variable argument
+     if calcArg.include? "=" then 
+       # Initialization of ARGV variables
+       key = calcArg[0,calcArg.index('=')]
+       value = calcArg[calcArg.index('=')+1,calcArg.length].to_i 
+       $calc.hashMap[key] = value
+       #$calc.eval("let "+calcArg.to_s.chomp) -- > parser error when initializing negative variables
+       # Initialization of ENV variables for the ewe compiler
+       if value < 0 then
+       value *= -1
+       header += "   #{key.to_s} := #{value.to_s}\n   #{key.to_s} := #{key.to_s} * MONE\n"
+       else
+       header += "   #{key.to_s} := #{$calc.hashMap[key].to_s}\n"
+       end
+       arg = :none
+     end
+  end
+end
+  i += 1
+end
+# Initialization of ENV variables taking into account the preference criteria
+header += "# ENV variables\n"
+if envVarPref then
+ENV.each do |k,v|
+  if k[0,7] == "CALCVAR" then
+    key = k[7,k.length]
+    $calc.hashMap[key]=v.to_i
+    value = $calc.hashMap[key]
+    # Initialization of ENV variables for the ewe compiler
+    if value < 0 then
+    value *= -1
+    header += "   #{key.to_s} := #{value.to_s}\n   #{key.to_s} := #{key.to_s} * MONE\n"
+    else
+    header += "   #{key.to_s} := #{$calc.hashMap[key].to_s}\n"
+    end
+  end
+end
+else
+ENV.each do |k,v|
+  if k[0,7] == "CALCVAR" then
+    key = k[7,k.length]
+    unless $calc.hashMap.key?(key) 
+     $calc.hashMap[key]=v.to_i
+     value = $calc.hashMap[key]
+     # Initialization of ENV variables for the ewe compiler
+     if value < 0 then
+     value *= -1
+     header += "   #{key.to_s} := #{value.to_s}\n   #{key.to_s} := #{key.to_s} * MONE\n"
+     else
+     header += "   #{key.to_s} := #{$calc.hashMap[key].to_s}\n"
+     end
+     end
+  end
+end
+end
+# Calc execution
+if countFiles > 0 then
+  $calc.interactiveMode = false
+end
+
+if $calc.interactiveMode == false then
+  # Non interactive mode
+  error = false
+  fileFound.each_with_index{ |value,index|
+    resultLines = ""
+    if value then
+    eweLines = ""
+    file = IO.readlines(ARGV[index])
+    file.each do |line|
+    begin
+      if $calc.compileEWE then
+         eweLines += $calc.eweCompile(line)
+      else
+      result = $calc.eval(line)
+      resultLines = resultLines + "= " + result.to_s + "\n"
+      end
+    rescue ParseError
+      puts "* parser error on file: " + ARGV[index].to_s
+	  error = true
+      break;
+    rescue UnrecognizedTokenException
+      puts "* scanner error on file: " + ARGV[index].to_s
+	  error = true
+      break;
+    end
+    end
+    unless $calc.compileEWE
+        unless error
+        puts resultLines
+        end
+    end
+    if $calc.compileEWE then
+      unless error
+        filePath = ARGV[index]
+        filePath = filePath[0,filePath.length-4]+"ewe"
+        equPos = 7
+        $calc.hashMap.each_key do|key|
+          footer += "equ #{key.to_s} M[#{equPos}]\n"
+          equPos += 1
+        end
+        File.write(filePath,header + eweLines + footer)
+      end
+    end
+	   error = false
+    end
+}
+else
+  # Interactive mode
+  $stdout.print "> "
+  while((text=STDIN.gets)!=nil)
+ 	break if text.chomp.eql? "<eof>"
+    $stdout.flush
+    begin
+      result = $calc.eval(text)
+      puts "= " + result.to_s
+    rescue ParseError
+      puts "* parser error"
+    rescue UnrecognizedTokenException
+      puts "* scanner error"
+    end
+    $stdout.print "> "
+  end
+end

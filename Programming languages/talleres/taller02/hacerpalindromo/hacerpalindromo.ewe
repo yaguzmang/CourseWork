@@ -1,0 +1,45 @@
+INICIO:
+       dir := 0
+       cero := 0
+       uno := 1
+       dos := 2
+       len := 256
+       readStr(str,len)
+       goto CICLO
+CICLO:
+       var := M[dir+0]
+       if var = cero then goto COND
+       dir := dir + uno
+       goto CICLO
+COND:
+       if dir = cero then goto FIN
+       cont := dir       
+       dirfin := dir * dos
+       dirfin := dirfin - uno
+       dir := cero
+       goto CICLO2
+CICLO2:
+       var := M[dir+0]
+       M[dirfin+0] := var
+       dir := dir + uno
+       dirfin := dirfin - uno
+       cont := cont - uno
+       if cont = cero then goto IMPRIMIR
+       goto CICLO2  
+IMPRIMIR:
+       writeStr(str)
+       goto FIN
+FIN:
+        halt
+equ str M[0]
+equ dir M[256]
+equ cero M[257]
+equ uno M[258]
+equ var M[259]
+equ len M[260]
+equ str1 M[261]
+equ dos M[262]
+equ modulo M[263]
+equ cont M[264]
+equ varfin M[265]
+equ dirfin M[266]

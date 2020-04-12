@@ -1,0 +1,25 @@
+INICIO:
+        cero := 0
+	uno := 1
+        cont := 0
+	readInt(n)
+	if cont < n then goto CICLO
+        writeInt(cero)
+	goto FIN
+CICLO:
+        cont := cont + uno
+        readInt(a)
+        suma := suma + a
+        if cont < n then goto CICLO
+        promedio := suma/n
+	writeInt(promedio)
+	goto FIN
+FIN: 
+        halt
+equ cero M[0]
+equ uno M[2]
+equ a M[1]
+equ n M[6]
+equ cont M[7]
+equ suma M[8]
+equ promedio M[9]

@@ -1,0 +1,28 @@
+inicio:
+       dir := 0
+       cero := 0
+       uno := 1
+       dosc := 256
+       readStr(str1,uno)
+       len := 256
+       readStr(str2,len)
+ciclo:
+       var := M[dir+0]
+       if var = cero then goto fin
+       if var = str1 then goto imprimir
+       dir := dir + uno
+       goto ciclo
+imprimir: 
+       writeInt(dir)
+       dir := dir + uno
+       goto ciclo
+fin:
+       halt
+equ str2 M[0]
+equ dir M[256]
+equ cero M[257]
+equ uno M[258]
+equ var M[259]
+equ len M[260]
+equ str1 M[261]
+equ dosc M[262]

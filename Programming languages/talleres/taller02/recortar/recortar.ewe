@@ -1,0 +1,59 @@
+INICIO:
+       cont1 := 0
+       cont2 := 0
+       asciiespacio := 32
+       cero := 0
+       uno := 1
+       len := 256
+       dir := 0
+       basestr2 := 0
+       readStr(str,len)
+LENSTR1:
+       var := M[cont1+0]
+       if var <> asciiespacio then goto BASECADENA
+       cont1 := cont1 + uno
+       goto LENSTR1
+BASECADENA:
+       if cont1 = cero then goto FIN
+       basestr2 := cont1
+       goto LENSTR2
+LENSTR2:
+       var := M[basestr2+0]
+       if var = cero then goto COND
+       cont2 := cont2 + uno
+       basestr2 := basestr2 + uno
+       goto LENSTR2
+COND:
+       lentotal := cont1
+       lentotal := lentotal + cont2
+       dirfin := cont1
+       dir := cero
+       goto CICLO2
+CICLO2:
+       varfin := M[dirfin+0]
+       if varfin = cero then goto BORRAR
+       M[dir+0]:= varfin
+       dir := dir + uno
+       dirfin := dirfin + uno
+       goto CICLO2
+BORRAR:
+      if cont2 = lentotal then goto FIN
+      M[cont2+0] := cero
+      cont2 := cont2 + uno
+      goto BORRAR
+FIN:
+        writeStr(str)
+        halt
+equ str M[0]
+equ cont1 M[256]
+equ cero M[257]
+equ uno M[258]
+equ var M[259]
+equ len M[260]
+equ cont2 M[261]
+equ asciiespacio M[264]
+equ varfin M[265]
+equ dirfin M[266]
+equ basestr2  M[524]
+equ dir M[728]
+equ lentotal M[729]

@@ -1,0 +1,19 @@
+import java_cup.runtime.Symbol;
+import java_cup.runtime.ComplexSymbolFactory;
+import co.edu.eafit.dis.st0270.dyckcompiler.abs.AbsTree;
+import co.edu.eafit.dis.st0270.dyckcompiler.abs.DyckAbs;
+import co.edu.eafit.dis.st0270.dyckcompiler.abs.ProgAbs;
+
+terminal LPAREN, RPAREN;
+non terminal AbsTree dyck, prog;
+
+start with prog;
+
+prog ::= dyck:d                            {: RESULT = new ProgAbs(d);        :}
+     ;
+
+dyck ::=   LPAREN RPAREN                   {: RESULT = new DyckAbs();         :}
+     |     LPAREN dyck:s1 RPAREN           {: RESULT = new DyckAbs(s1, null); :}
+     |     LPAREN RPAREN dyck:s2           {: RESULT = new DyckAbs(null, s2); :}
+     |     LPAREN dyck:s1 RPAREN dyck:s2   {: RESULT = new DyckAbs(s1, s2);   :}
+     ;

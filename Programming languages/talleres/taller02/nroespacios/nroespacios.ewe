@@ -1,0 +1,40 @@
+# Numero de espacios
+INICIO:
+             len := 255
+	     cero := 0                 
+	     uno := 1
+	     treintaydos := 32
+	     cont := 0
+	     i := 0
+	     # s = input()
+	     readStr(s,len)
+             if len < uno then goto CERO
+	     #ciclo
+CICLO:
+             #s[i]
+             i := i + uno
+             valordir := M[i + 0]
+             if valordir <> treintaydos then goto CONDCICLO
+             cont := cont + uno
+             if i <= len then goto CICLO
+             goto FINCICLO
+FINCICLO:
+             writeInt(cont)
+             goto FIN
+CONDCICLO:
+             if i > len then goto FINCICLO
+	     goto CICLO
+CERO:
+             writeInt(cero)
+             goto FIN
+FIN:
+             halt
+equ s        M[1]
+equ cero     M[256]
+equ uno      M[257]
+equ i        M[260]
+equ dir    M[263]
+equ valordir M[264]
+equ len      M[265]
+equ treintaydos M[266]
+equ cont M[267]

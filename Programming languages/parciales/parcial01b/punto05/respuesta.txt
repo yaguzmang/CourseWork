@@ -1,0 +1,6 @@
+Lo que hay de común entre la historia de los lenguajes SML y Prolog
+es que sus creadores estudiaban y trabajaban en un sistema automatizado de
+prueba de teoremas, y de esto nacieron ambos SML y prolog.
+Además, los creadores de estos lenguajes también estudiaban la lógica,
+mas especificamente un tipo de lógica propuesta por Dana Scott, en el caso
+de SML.

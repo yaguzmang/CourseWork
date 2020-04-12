@@ -1,0 +1,26 @@
+INICIO:
+       cont := 0
+       cero := 0
+       uno := 1
+       dos := 2
+       readInt(n)
+       if n = cero then goto TCERO
+       cont := n
+       goto CICLO
+CICLO:
+       
+       if cont < dos then goto FIN
+       cont := cont - uno
+       n := n * cont
+       goto CICLO
+TCERO:
+       n := uno
+       goto FIN
+FIN:
+        writeInt(n)
+        halt
+equ n M[0]
+equ cero M[257]
+equ uno M[258]
+equ dos M[262]
+equ cont M[264]

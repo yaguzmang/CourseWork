@@ -1,0 +1,65 @@
+INICIO:
+       cont1 := 0
+       cont2 := 0
+       basestr2 := 267
+       basestr22 := 267
+       cero := 0
+       uno := 1
+       dos := 2
+       len := 256
+       dir := 0
+       mt := "Son iguales"
+       mf := "No son iguales"
+       readStr(str,len)
+       readStr(str2,len)
+LENSTR1:
+       var := M[cont1+0]
+       if var = cero then goto LENSTR2
+       cont1 := cont1 + uno
+       goto LENSTR1
+LENSTR2:
+       var := M[basestr2+0]
+       if var = cero then goto COND
+       cont2 := cont2 + uno
+       basestr2 := basestr2 + uno
+       goto LENSTR2
+COND:
+       if cont1 <> cont2 then goto MFALSO    
+       dirfin := basestr22
+       dir := cero
+       goto CICLO2
+CICLO2:
+       var := M[dir+0]
+       varfin := M[dirfin+0]
+       dir := dir + uno
+       dirfin := dirfin + uno
+       if var <> varfin then goto MFALSO
+       cont1 := cont1 - uno
+       if cont1 = cero then goto MVERDADERO
+       goto CICLO2
+MFALSO: 
+       writeStr(mf)
+       goto FIN  
+MVERDADERO:
+       writeStr(mt)
+       goto FIN  
+FIN:
+        halt
+equ str M[0]
+equ cont1 M[256]
+equ cero M[257]
+equ uno M[258]
+equ var M[259]
+equ len M[260]
+equ cont2 M[261]
+equ dos M[262]
+equ modulo M[263]
+equ cont M[264]
+equ varfin M[265]
+equ dirfin M[266]
+equ str2  M[267]
+equ basestr2  M[524]
+equ mt M[525]
+equ mf M[626]
+equ basestr22 M[727]
+equ dir M[728]

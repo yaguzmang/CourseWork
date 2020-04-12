@@ -1,0 +1,19 @@
+
+terminal NUMBER, LPAREN, RPAREN, PLUS, SUB, TIMES, DIVIDE;
+non terminal Integer expr, term, factor;
+
+start with expr;
+
+expr ::= expr:e1 PLUS term:t2 {: RESULT = e1 + t2 :}
+     |	 expr:e1 SUB  term:t2 {: RESULT = e1 + t2 :}
+     |   term:t1
+     ;
+     
+term ::= term:t1 TIMES factor:f2 {: RESULT = t1 * f2; :}
+     |   term:t1 DIVIDE factor:f2 {: RESULT = t1 / f2; :}
+     |	 factor:f1                {: RESULT = f1; :}
+     ;
+
+factor ::= NUMBER n1              {: RESULT = Integer.parseInt((String) n1); :}
+       |   LPAREN expr:e1 RPAREN  {: RESULT = e1;
+       ;

@@ -1,0 +1,48 @@
+INICIO:
+       buenas := 0
+       malas := 0
+       cont := 0
+       cero := 0
+       uno := 1
+       dos := 2
+       len := 100
+       dir := 0
+       dirfin := 1
+       mayus := 90
+       minus := 97
+       readStr(str,len)
+CICLO:
+       var := M[dir+0]
+       varfin := M[dirfin+0]
+       if var = cero then goto FIN
+       if varfin = cero then goto FIN
+       cont := cont + uno
+       dir := dir + dos
+       dirfin := dirfin + dos
+       if var < minus then goto MALA
+       if varfin > mayus then goto MALA
+       buenas := buenas + uno
+       goto CICLO
+MALA:
+       malas := malas + uno
+       goto CICLO
+FIN:
+       writeInt(cont)
+       writeInt(buenas)
+       writeInt(malas)
+
+halt
+equ str M[0]
+equ uno M[101]
+equ var M[102]
+equ len M[103]
+equ cont M[104]
+equ varfin M[105]
+equ dirfin M[106]
+equ malas M[107]
+equ buenas M[108]
+equ dir M[109]
+equ mayus M[110]
+equ minus M[111]
+equ dos M[112]
+equ cero M[113]
